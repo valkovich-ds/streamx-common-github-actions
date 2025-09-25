@@ -87,12 +87,15 @@ Detail information please check [Quarkus GitHub Action](https://docs.quarkiverse
     workspace:
 
     # Defines ingestion message key value property.
-    #
-    # Value required only with unpublish action.
     key:
       
     # Specifies the sx:type metadata field within the ingestion message properties.
-    type:
+    type:     
+      
+    # Specifies the indexable metadata boolean value (true / false) within the ingestion message properties.
+    #
+    # Default value 'false'.
+    indexable:
 
     # Defines Ant-style path patterns for filtering ingestion data (e.g., styles/*.css, scripts/*.js).
     #
