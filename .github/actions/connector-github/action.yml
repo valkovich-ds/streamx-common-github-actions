@@ -94,9 +94,23 @@ runs:
       id: action
       run: |
         if [[ "${{ inputs.debug-enabled }}" == "true" ]]; then
-          export JDK_JAVA_OPTIONS="-Dquarkus.profile=debug"
+          export JDK_JAVA_OPTIONS="-Dquarkus.profile=debug";
         fi
-        jbang --java 21 --fresh --repos 'streamx-maven-public-releases=https://europe-west1-maven.pkg.dev/streamx-releases/streamx-maven-public-releases/' --repos 'mavencentral' --repos 'streamx-maven-snapshots=https://europe-west1-maven.pkg.dev/streamx-releases/streamx-maven-snapshots/' dev.streamx:streamx-connector-github:1.0.3-SNAPSHOT
+        output_filename="result_${{github.run_id}}.txt";
+        if [ -f "$output_filename" ]; then
+          rm "$output_filename";
+        fi
+        jbang --java 21 --fresh --repos 'streamx-maven-public-releases=https://europe-west1-maven.pkg.dev/streamx-releases/streamx-maven-public-releases/' --repos 'mavencentral' --repos 'streamx-maven-snapshots=https://europe-west1-maven.pkg.dev/streamx-releases/streamx-maven-snapshots/' dev.streamx:streamx-connector-github:1.0.4-SNAPSHOT &> "$output_filename"
+
+        errorsCount=$(cat "$output_filename" | grep -oi "::error" | wc -l);
+        if ((errorsCount > 0)); then
+          echo "-------------------------------------";
+          echo "Execution has ${errorsCount// /} error(s). Please validate logs output:";
+          echo "-------------------------------------";
+          cat "$output_filename";
+          rm "$output_filename";
+          exit 1;
+        fi
       shell: bash
       env:
         JSON_INPUTS: ${{ toJSON(inputs) }}
