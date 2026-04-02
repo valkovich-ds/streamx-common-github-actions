@@ -243,7 +243,7 @@ repeated downloads. This is especially impactful for build processes with numero
 dependencies.
 
 Before the JBang execution add these steps.
-```
+```yaml
     - name: Setup Java
       uses: actions/setup-java@v3
       with:
