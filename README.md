@@ -49,7 +49,7 @@ changes with StreamX using CloudEvents.
 
 Detail information please check [Quarkus GitHub Action](https://docs.quarkiverse.io/quarkus-github-action/dev/index.html) documentation.
 
-The action sends CloudEvents to StreamX's ingestion API. Use `source-provider` to automatically detect and ingest files from the repository, or `subject` to send a single event for a specific resource.
+The action sends CloudEvents to StreamX's ingestion API. Use `source-provider` to automatically detect and ingest files from the repository. When `source-provider` is not specified, `subject` and `event-type` are used to send a single event for a specific resource.
 
 ### Usage
 ```yaml
@@ -74,12 +74,10 @@ The action sends CloudEvents to StreamX's ingestion API. Use `source-provider` t
     # Specifies the provider name used to determine the ingestion data source.
     # Check section 'Ingestion data source provider' for details.
     #
-    # Required when not using `subject`.
     source-provider:
 
-    # CloudEvents subject. Alternative to source-provider for single-event ingestion.
-    #
-    # Required when not using `source-provider`.
+    # CloudEvents subject. Required when `source-provider` is not specified.
+    # Also required by ExternalSourceProvider.
     subject:
 
     # Specifies the root directory for ingestion data lookup. Defaults to github.workspace.
