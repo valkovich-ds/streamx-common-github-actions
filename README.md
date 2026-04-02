@@ -220,8 +220,8 @@ triggered via `workflow_dispatch`, where you already know exactly which resource
 on:
   workflow_dispatch:
     inputs:
-      resource_key:
-        description: "Resource key to unpublish (e.g., /styles/main.css)"
+      subject:
+        description: "CloudEvents subject to unpublish (e.g., /styles/main.css)"
         required: true
         type: string
   unpublish-resource:
@@ -231,7 +231,7 @@ on:
         uses: streamx-hub/streamx-common-github-actions/.github/actions/connector-github@v1
         with:
           event-type: com.streamx.blueprints.web-resource.unpublished.v1
-          subject: ${{ inputs.resource_key }}
+          subject: ${{ inputs.subject }}
           streamx-ingestion-token: ${{ secrets.STREAMX_INGESTION_TOKEN }}
           streamx-ingestion-url: ${{ vars.STREAMX_INGESTION_URL }}
 ```
