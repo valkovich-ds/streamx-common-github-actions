@@ -5,9 +5,9 @@ This repository contains a GitHub actions used in StreamX repositories
 ## Create JIRA Release GitHub Action
 
 
-This GitHub action is designed to automate the creation of JIRA releases. 
-It operates by adding release version details to the `fix versions` field in a JIRA issues, 
-driven by task numbers derived from commits since the previous git tag. 
+This GitHub action is designed to automate the creation of JIRA releases.
+It operates by adding release version details to the `fix versions` field in a JIRA issues,
+driven by task numbers derived from commits since the previous git tag.
 The action should be set up to run subsequent to code checkouts in the earlier workflow steps.
 
 ### Inputs
@@ -36,10 +36,10 @@ add following step to your GH workflow.
           releaseNamePrefix: ${{ github.event.repository.name }}
 ```
 
-Secrets `ATLASSIAN_CLOUD_USER`, `ATLASSIAN_CLOUD_APIKEY`, and `ATLASSIAN_CLOUD_DOMAIN` are defined at the StreamX-hub organization level 
+Secrets `ATLASSIAN_CLOUD_USER`, `ATLASSIAN_CLOUD_APIKEY`, and `ATLASSIAN_CLOUD_DOMAIN` are defined at the StreamX-hub organization level
 and should be accessible for all repositories without any additional configuration.
 
-The `ATLASSIAN_CLOUD_JIRA_PROJECT` variable is also defined at the organizational level. 
+The `ATLASSIAN_CLOUD_JIRA_PROJECT` variable is also defined at the organizational level.
 
 
 ## Create StreamX Connector GitHub Action
@@ -245,7 +245,7 @@ on:
 
 ### Enable dependency cache on GitHub workflows
 
-Optimize your GitHub Actions workflow by caching dependencies. This simple step delivers 
+Optimize your GitHub Actions workflow by caching dependencies. This simple step delivers
 significant performance gains, reducing execution time from minutes to seconds by avoiding
 repeated downloads. This is especially impactful for build processes with numerous or large
 dependencies.

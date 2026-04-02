@@ -32,13 +32,13 @@ runs:
         else
           RELEASED_VERSION=${{ inputs.tag }}
           echo "Using provided tag from inputs"
-        fi  
+        fi
 
         echo "Released version: ${RELEASED_VERSION}"
 
         PREVIOUS_VERSION=$(git describe --abbrev=0 ${RELEASED_VERSION}^ --tags 2>/dev/null) || true
         echo "Previous version: ${PREVIOUS_VERSION}"
-        
+
         if [ -z "$PREVIOUS_VERSION" ]
         then
           COMMITS=$(git log ${RELEASED_VERSION} --pretty=format:"%s" | grep ${{ inputs.atlassianCloudJiraProject }} || true)
