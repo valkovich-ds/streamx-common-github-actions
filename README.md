@@ -134,6 +134,8 @@ This data source provider allows to download data from external services.
     event-type:
     # URL property from where resource data is downloaded and used as ingestion data.
     external-resource-url:
+    # CloudEvents subject identifying the resource.
+    subject:
 ```
 
 * *PullRequestDiffSourceProvider*
