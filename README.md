@@ -53,7 +53,7 @@ Detail information please check [Quarkus GitHub Action](https://docs.quarkiverse
 
 The action operates in two modes:
 
-* **Source-provider mode** - Uses `event-type` + `source-provider` to detect and ingest content from the workspace. Suitable for batch operations and pull request synchronization.
+* **Source-provider mode** - Uses `event-type` + `source-provider` to detect and ingest content from the repository. Suitable for publishing all matching files or synchronizing pull request changes.
 * **Subject mode** - Uses `event-type` + `subject` for simple single-event ingestion without source detection.
 
 ### Usage
