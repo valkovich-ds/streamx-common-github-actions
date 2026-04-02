@@ -49,12 +49,7 @@ changes with StreamX using CloudEvents.
 
 Detail information please check [Quarkus GitHub Action](https://docs.quarkiverse.io/quarkus-github-action/dev/index.html) documentation.
 
-### Modes
-
-The action operates in two modes:
-
-* **Source-provider mode** - Uses `event-type` + `source-provider` to detect and ingest content from the repository. Suitable for publishing all matching files or synchronizing pull request changes.
-* **Subject mode** - Uses `event-type` + `subject` for simple single-event ingestion without source detection.
+The action sends CloudEvents to StreamX's ingestion API. Use `source-provider` to automatically detect and ingest files from the repository, or `subject` to send a single event for a specific resource.
 
 ### Usage
 ```yaml
@@ -79,12 +74,12 @@ The action operates in two modes:
     # Specifies the provider name used to determine the ingestion data source.
     # Check section 'Ingestion data source provider' for details.
     #
-    # Required in source-provider mode.
+    # Required when not using `subject`.
     source-provider:
 
-    # CloudEvents subject. Alternative to source-provider for simple single-event ingestion.
+    # CloudEvents subject. Alternative to source-provider for single-event ingestion.
     #
-    # Required in subject mode.
+    # Required when not using `source-provider`.
     subject:
 
     # Specifies the root directory for ingestion data lookup. Defaults to github.workspace.
@@ -219,7 +214,7 @@ on:
 
 #### Unpublish a specific resource from StreamX
 
-Use subject mode when you need to send a single event without scanning files — for example,
+Use `subject` to send a single event without scanning files — for example,
 to unpublish a specific resource by its key. This is useful for manual content removal
 triggered via `workflow_dispatch`, where you already know exactly which resource to act on.
 
