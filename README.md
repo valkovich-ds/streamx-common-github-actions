@@ -4,7 +4,6 @@ This repository contains a GitHub actions used in StreamX repositories
 
 ## Create JIRA Release GitHub Action
 
-
 This GitHub action is designed to automate the creation of JIRA releases.
 It operates by adding release version details to the `fix versions` field in a JIRA issues,
 driven by task numbers derived from commits since the previous git tag.
@@ -42,7 +41,7 @@ and should be accessible for all repositories without any additional configurati
 The `ATLASSIAN_CLOUD_JIRA_PROJECT` variable is also defined at the organizational level.
 
 
-## Create StreamX Connector GitHub Action
+## StreamX GitHub Connector Action
 
 StreamX GitHub Connector is a Quarkus GitHub Action project that allows syncing GitHub
 changes with StreamX using CloudEvents.
@@ -104,7 +103,7 @@ The action sends CloudEvents to StreamX's ingestion API. Use `source-provider` t
 
 * *BatchSourceProvider*
 
-Source provider used for source lookup inside workspace directory and returns the list of all resources
+Source provider used for source lookup inside the repository and returns the list of all resources
 that matches given `include-patterns` configuration.
 
 ```yaml
@@ -152,7 +151,7 @@ For accurate diff detection, all changelog data must be loaded during the checko
 
 ### Scenarios
 
-#### Sync merged pull request with StreamX for CSS and JS web resources only
+#### Ingest merged pull request changes to StreamX for CSS and JS web resources only
 
 ```yaml
 on:
@@ -213,7 +212,7 @@ on:
 #### Unpublish a specific resource from StreamX
 
 Use `subject` to send a single event without scanning files — for example,
-to unpublish a specific resource by its key. This is useful for manual content removal
+to unpublish a specific resource by its subject. This is useful for manual content removal
 triggered via `workflow_dispatch`, where you already know exactly which resource to act on.
 
 ```yaml
