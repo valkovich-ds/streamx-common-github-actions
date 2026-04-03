@@ -100,13 +100,15 @@ runs:
         jbang_exit=0
         jbang --java 21 --fresh --repos 'streamx-maven-public-releases=https://europe-west1-maven.pkg.dev/streamx-releases/streamx-maven-public-releases/' --repos 'mavencentral' --repos 'streamx-maven-snapshots=https://europe-west1-maven.pkg.dev/streamx-releases/streamx-maven-snapshots/' com.streamx:streamx-github-connector:2.0.0 &> "$output_filename" || jbang_exit=$?
 
-        errorsCount=$(cat "$output_filename" | grep -oi "::error" | wc -l);
+        errorsCount=$(grep -oi "::error" "$output_filename" 2>/dev/null | wc -l) || true
+
+        echo "-------------------------------------";
+        echo "Execution result (exit code: ${jbang_exit}, errors: ${errorsCount// /}):";
+        echo "-------------------------------------";
+        sed 's/^::/  ::/g' "$output_filename";
+
+        rm "$output_filename";
         if [ "$jbang_exit" -ne 0 ] || ((errorsCount > 0)); then
-          echo "-------------------------------------";
-          echo "Execution failed (exit code: ${jbang_exit}, errors: ${errorsCount// /}). Output:";
-          echo "-------------------------------------";
-          cat "$output_filename";
-          rm "$output_filename";
           exit 1;
         fi
       shell: bash
